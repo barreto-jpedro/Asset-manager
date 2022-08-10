@@ -1,1 +1,1 @@
-flask --app main run
+flask --app flaskr --debug run

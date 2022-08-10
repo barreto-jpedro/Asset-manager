@@ -1,3 +1,10 @@
 
 #Virtual enviroments
 venv310
+
+#Cache
+__pycache__/
+
+#Database
+instance/
+
