@@ -1,15 +1,23 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h1>{% block title %}New Post{% endblock %}</h1>
+  <h1>{% block title %}New operation{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
   <form method="post">
-    <label for="title">Title</label>
-    <input name="title" id="title" value="{{ request.form['title'] }}" required>
-    <label for="body">Body</label>
-    <textarea name="body" id="body">{{ request.form['body'] }}</textarea>
+    <label for="ticker">Ticker</label>
+    <input name="ticker" id="ticker" value="{{ request.form['ticker'] }}" required>
+    
+    <label for="price">Price</label>
+    <textarea name="price" id="price">{{ request.form['price'] }}</textarea>
+    
+    <label for="amount">Amount</label>
+    <textarea name="amount" id="amount">{{ request.form['amount'] }}</textarea>
+    
+    <label for="created">Date</label>
+    <textarea name="created" id="created">{{ request.form['created'] }}</textarea>
+    
     <input type="submit" value="Save">
   </form>
 {% endblock %}
