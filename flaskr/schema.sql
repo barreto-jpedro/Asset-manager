@@ -14,5 +14,6 @@ CREATE TABLE post (
   title TEXT NOT NULL,
   body INTEGER NOT NULL,
   amount INTEGER NOT NULL,
+  operation TEXT NOT NULL,
   FOREIGN KEY (author_id) REFERENCES user (id)
 );

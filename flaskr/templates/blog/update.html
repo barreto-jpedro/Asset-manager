@@ -17,6 +17,9 @@
     <label for="amount">Amount</label>
     <textarea name="amount" id="amount">{{ request.form['amount'] or post['amount'] }}</textarea>
     
+    <label for="operation">Date</label>
+    <textarea name="operation" id="operation">{{ request.form['operation'] or post['operation'] }}</textarea>
+    
     <label for="created">Date</label>
     <textarea name="created" id="created">{{ request.form['created'] or post['created'] }}</textarea>
     
