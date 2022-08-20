@@ -17,7 +17,7 @@
     <label for="amount">Amount</label>
     <textarea name="amount" id="amount">{{ request.form['amount'] or post['amount'] }}</textarea>
     
-    <label for="operation">Date</label>
+    <label for="operation">Operation</label>
     <textarea name="operation" id="operation">{{ request.form['operation'] or post['operation'] }}</textarea>
     
     <label for="created">Date</label>
@@ -27,7 +27,7 @@
   
   </form>
   <hr>
-  <form action="{{ url_for('blog.delete', id=post['id']) }}" method="post">
+  <form action="{{ url_for('blog.DeletePost', id=post['id']) }}" method="post">
     <input class="danger" type="submit" value="Delete" onclick="return confirm('Are you sure?');">
   </form>
 {% endblock %}

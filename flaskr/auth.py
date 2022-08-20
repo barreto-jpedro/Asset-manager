@@ -4,14 +4,15 @@ from flask import (
     Blueprint, flash, g, redirect, render_template, request, session, url_for
 )
 from werkzeug.security import check_password_hash, generate_password_hash
+from flask.views import MethodView
 
 from flaskr.db import get_db
 
-bp = Blueprint('auth', __name__, url_prefix='/auth')
+class RegisterUser(MethodView):
+    def get(self):
+        return render_template('auth/register.html')
 
-@bp.route('/register', methods=('GET', 'POST'))
-def register():
-    if request.method == 'POST':
+    def post(self):
         username = request.form['username']
         password = request.form['password']
         db = get_db()
@@ -32,16 +33,15 @@ def register():
             except db.IntegrityError:
                 error = f"User {username} is already registered."
             else:
-                return redirect(url_for("auth.login"))
+                return redirect(url_for("auth.LoginUser"))
 
         flash(error)
 
-    return render_template('auth/register.html')
-
-
-@bp.route('/login', methods=('GET', 'POST'))
-def login():
-    if request.method == 'POST':
+class LoginUser(MethodView):
+    def get(self):
+        return render_template('auth/login.html')
+    
+    def post(self):
         username = request.form['username']
         password = request.form['password']
         db = get_db()
@@ -62,36 +62,35 @@ def login():
 
         flash(error)
 
-    return render_template('auth/login.html')
 
-
-
-@bp.before_app_request
-def load_logged_in_user():
-    user_id = session.get('user_id')
-
-    if user_id is None:
-        g.user = None
-    else:
-        g.user = get_db().execute(
-            'SELECT * FROM user WHERE id = ?', (user_id,)
-        ).fetchone()
-        
-        
-@bp.route('/logout')
-def logout():
-    session.clear()
-    return redirect(url_for('index'))
+class LogoutUser(MethodView): 
+    def get(self):
+        session.clear()
+        return redirect(url_for('index'))
 
 
 def login_required(view):
     @functools.wraps(view)
     def wrapped_view(**kwargs):
         if g.user is None:
-            return redirect(url_for('auth.login'))
+            return redirect(url_for('login'))
 
         return view(**kwargs)
 
     return wrapped_view
 
 
+routes = Blueprint('auth', __name__, url_prefix='/auth')
+routes.add_url_rule('/register', view_func=RegisterUser.as_view("RegisterUser"))
+routes.add_url_rule('/login', view_func=LoginUser.as_view("LoginUser"))
+routes.add_url_rule('/logout', view_func=LogoutUser.as_view("LogoutUser"))
+
+@routes.before_app_request
+def load_logged_in_user():
+    user_id = session.get('user_id')
+    if user_id is None:
+        g.user = None
+    else:
+        g.user = get_db().execute(
+            'SELECT * FROM user WHERE id = ?', (user_id,)
+        ).fetchone()
