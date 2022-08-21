@@ -11,7 +11,7 @@
   {% for transaction in transactions %}
     {% if g.user['id'] == transaction['author_id'] %}
       <article class="post">
-        <header> 
+        <header>
           <div>
             <h1>{{ transaction['assetTicker'] }}</h1>
             <div class="about">Date: {{ transaction['transactionDate'].strftime('%Y-%m-%d') }}</div>
@@ -23,7 +23,7 @@
         <p class="operation"> Operation: {{ transaction['operation'] }}</p>
       </article>
     {% endif %}
-  
+
     {% if not loop.last %}
       <hr>
     {% endif %}

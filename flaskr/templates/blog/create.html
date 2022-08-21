@@ -8,19 +8,19 @@
   <form method="post">
     <label for="assetTicker">Asset Ticker</label>
     <input name="assetTicker" id="assetTicker" value="{{ request.form['assetTicker'] }}" required>
-    
+
     <label for="avaragePaidValue">Avarage Paid Value</label>
     <textarea name="avaragePaidValue" id="avaragePaidValue">{{ request.form['avaragePaidValue'] }}</textarea>
-    
+
     <label for="amount">Amount</label>
     <textarea name="amount" id="amount">{{ request.form['amount'] }}</textarea>
-    
+
     <label for="operation">Operation</label>
     <textarea name="operation" id="operation">{{ request.form['operation'] }}</textarea>
 
     <label for="transactionDate">Date</label>
     <textarea name="transactionDate" id="transactionDate">{{ request.form['transactionDate'] }}</textarea>
-    
+
     <input type="submit" value="Save">
   </form>
 {% endblock %}

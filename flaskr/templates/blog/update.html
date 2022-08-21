@@ -6,25 +6,25 @@
 
 {% block content %}
   <form method="post">
-    
+
     <label for="assetTicker">Asset Ticker</label>
     <input name="assetTicker" id="assetTicker"
       value="{{ request.form['assetTicker'] or transactions['assetTicker'] }}" required>
-    
+
       <label for="avaragePaidValue">Avarage Paid Value</label>
     <textarea name="avaragePaidValue" id="avaragePaidValue">{{ request.form['avaragePaidValue'] or transactions['avaragePaidValue'] }}</textarea>
-    
+
     <label for="amount">Amount</label>
     <textarea name="amount" id="amount">{{ request.form['amount'] or transactions['amount'] }}</textarea>
-    
+
     <label for="operation">Operation</label>
     <textarea name="operation" id="operation">{{ request.form['operation'] or transactions['operation'] }}</textarea>
-    
+
     <label for="transactionDate">Date</label>
     <textarea name="transactionDate" id="transactionDate">{{ request.form['transactionDate'] or transactions['transactionDate'] }}</textarea>
-    
+
     <input type="submit" value="Save">
-  
+
   </form>
   <hr>
   <form action="{{ url_for('blog.DeleteTransaction', id=transactions['id']) }}" method="post">
