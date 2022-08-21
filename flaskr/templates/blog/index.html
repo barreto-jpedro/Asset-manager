@@ -9,20 +9,21 @@
 
 {% block content %}
   {% for post in posts %}
-    <article class="post">
-      <header>
-        <div>
-          <h1>{{ post['title'] }}</h1>
-          <div class="about">Date: {{ post['created'].strftime('%Y-%m-%d') }}</div>
-        </div>
-        {% if g.user['id'] == post['author_id'] %}
-          <a class="action" href="{{ url_for('blog.UpdatePost', id=post['id']) }}">Edit</a>
-        {% endif %}
-      </header>
-      <p class="body"> Price: R${{ post['body'] }}</p>
-      <p class="body"> Amount: {{ post['amount'] }}</p>
-      <p class="operation"> Operation: {{ post['operation'] }}</p>
-    </article>
+    {% if g.user['id'] == post['author_id'] %}
+      <article class="post">
+        <header> 
+          <div>
+            <h1>{{ post['title'] }}</h1>
+            <div class="about">Date: {{ post['created'].strftime('%Y-%m-%d') }}</div>
+          </div>
+            <a class="action" href="{{ url_for('blog.UpdatePost', id=post['id']) }}">Edit</a>
+        </header>
+        <p class="body"> Price: R${{ post['body'] }}</p>
+        <p class="body"> Amount: {{ post['amount'] }}</p>
+        <p class="operation"> Operation: {{ post['operation'] }}</p>
+      </article>
+    {% endif %}
+  
     {% if not loop.last %}
       <hr>
     {% endif %}

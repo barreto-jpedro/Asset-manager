@@ -3,8 +3,8 @@ import os
 from flask import Flask
 
 from . import db
-from . import auth
-from . import blog
+from .views import auth
+from .views import blog
 
 
 def create_app(test_config=None):

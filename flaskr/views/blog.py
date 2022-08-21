@@ -4,7 +4,7 @@ from flask import (
 from werkzeug.exceptions import abort
 from flask.views import MethodView
 
-from flaskr.auth import login_required
+from flaskr.views.auth import login_required
 from flaskr.db import get_db
 
 
